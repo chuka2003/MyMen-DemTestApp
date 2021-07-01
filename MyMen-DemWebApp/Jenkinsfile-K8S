@@ -2,7 +2,7 @@ node ("slave-001") {
   def image
   def mvnHome = tool 'Maven3'
      stage ('checkout') {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://chuka2003@bitbucket.org/chuka2003/mysynopsistestapprepo/']]])      
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/chuka2003/MyMen-DemTestApp/']]])      
         }
    
     stage ('Build') {
