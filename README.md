@@ -17,6 +17,7 @@ aws configure
 *you will be prompted for your access and secret keys, as well as your AWS region and output
 
 2. Clone this repo locally
+
 git clone https://github.com/chuka2003/MyMen-DemTestApp/
 
 3. After cloning has been completed, change directory to the terraform repo folder
