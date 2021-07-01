@@ -1,0 +1,32 @@
+node ("slave-001") {
+  def image
+  def mvnHome = tool 'Maven3'
+     stage ('checkout') {
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://chuka2003@bitbucket.org/chuka2003/mysynopsistestapprepo/']]])      
+        }
+   
+    stage ('Build') {
+            sh 'mvn -f MyMen-DemWebApp/pom.xml clean install'           
+        }
+       
+       
+    stage ('Docker Build') {
+         // Build and push image with Jenkins' docker-plugin
+            withDockerRegistry([credentialsId: "dockerhub", url: "https://index.docker.io/v1/"]) {
+            image = docker.build("chuka2003/tomcat", "MyMen-DemWebApp")
+            image.push()    
+            }
+        }
+
+      stage ('K8S Deploy') {
+       
+                kubernetesDeploy(
+                    configs: 'MyMen-DemWebApp/tomcatdeploy_lb.yml',
+                    kubeconfigId: 'K8S',
+                    enableConfigSubstitution: true
+                    )           
+               
+            
+        }
+    
+}
