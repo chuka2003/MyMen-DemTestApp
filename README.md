@@ -29,7 +29,7 @@ cd ~/MyMen-DemTestApp/terraformproject
 ```
 
 ```bash
-4. Initialization Terraform and apply
+4. Terraform initialization and apply
 terraform init
 terraform apply -auto-approve
 
