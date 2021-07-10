@@ -28,8 +28,9 @@ git clone https://github.com/chuka2003/MyMen-DemTestApp/
 cd ~/MyMen-DemTestApp/terraformproject
 ```
 
-```bash
+
 4. Terraform initialization and apply
+```bash 
 terraform init
 terraform apply -auto-approve
 
