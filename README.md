@@ -25,7 +25,7 @@ git clone https://github.com/chuka2003/MyMen-DemTestApp/
 
 ```bash
 3. After cloning has been completed, change directory to the terraform repo folder
-cd ~/mysynopsistestapprepo/terraformproject
+cd ~/MyMen-DemTestApp/terraformproject
 ```
 
 ```bash
