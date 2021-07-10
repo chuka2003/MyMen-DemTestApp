@@ -10,21 +10,22 @@ Install kubectl
 Jenkins Master and Slave configuration
 
 Steps:
-```bash
+
 1. Configure your AWS environment on your terminal
+```bash
 aws configure
 
-
-*you will be prompted for your access and secret keys, as well as your AWS region and output
+#you will be prompted for your access and secret keys, as well as your AWS region and output
 ```
 
-```bash
+
 2. Clone this repo locally
+```bash
 git clone https://github.com/chuka2003/MyMen-DemTestApp/
 ```
 
-```bash
 3. After cloning has been completed, change directory to the terraform repo folder
+```bash
 cd ~/MyMen-DemTestApp/terraformproject
 ```
 
@@ -34,56 +35,58 @@ cd ~/MyMen-DemTestApp/terraformproject
 terraform init
 terraform apply -auto-approve
 
-*Infrastructure creation may take up to 15 minutes
+#Infrastructure creation may take up to 15 minutes
 ```
 
-```bash
+
 5. Create clusterrole as admin
+```bash
 kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=system:anonymous
 ```
 
-```bash
+
 6. Update kubeconfig file on local machine
+```bash
 aws eks update-kubeconfig --name devops-eks --region us-east-1
 ```
 
-```bash
 7. Copy kubeconfig file contents; can use the CAT command to view the contents, you will need it in step 9b
+```bash
 cat ~/.kube/config
 ```
 
-```bash
+
 8. ssh into your jenkins slave machine and run the following commands
+```bash
 sudo apt install maven -y
 sudo apt install docker.io -y
 sudo chmod 666 /var/run/docker.sock
 ```
 
-```bash
 9. Log into jenkins master and navigate to Global credentials
 a. create credentials for your docker hub account. Enter the ID as "dockerhub"
 b. create credentials for Kubernetes. Enter ID as "K8S" and paste the kubeconfig in the textbox provided
-```
 
-```bash
+
 10. Copy the contents of jenkins file (Jenkinsfile-K8S) and create a new pipeline
 a. Update your jenkins slave as necessary in the jenkins pipeline file
 b. Update your docker hub user id in the jenkins pipeline file
-```
 
-```bash
+
 11. Save your jenkins configuration and then proceed to build
-```
 
-```bash
+
+
 12. Verify your deployment; run
+```bash
 kubectl get pods
 kubectl get deployments
 kubectl get svc
 ```
 
-```bash
+
 13. From the 'kubectl get svc', copy the node public dns address and attach ':8080/men-dem' at the end as below
+```bash
 http://master_or_worker_node_public_ipaddress:8080/men-dem
 
 ```
